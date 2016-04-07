@@ -109,7 +109,7 @@ class Ventas extends \yii\db\ActiveRecord
 
 
     /**
-    **CALCULO TOTAL VENTAS    
+    **CALCULO TOTAL VENTAS POR TURNO
     **/
     public function CalcularTotalVentas($turno){
         
@@ -141,7 +141,7 @@ class Ventas extends \yii\db\ActiveRecord
     }
 
     /**
-    **CALCULO TOTAL VENTAS POR CADA PRODUCTO EJ: PROMO, POLLO, PAPA, ENSALADAS, BEBIDAS
+    **CALCULO TOTAL VENTAS POR TURNO, POR CADA PRODUCTO EJ: PROMO, POLLO, PAPA, ENSALADAS, BEBIDAS
     **/
     public function CalcularCantidadProductosVendidos($turno){
 

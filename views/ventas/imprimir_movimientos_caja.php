@@ -13,64 +13,76 @@
 	<th>Saldo</th>
 </tr>
 
-<?php $i=0; ?>	
+<?php 
+	$i=0;
+	$saldo=0;	
+	$ventasTotal=0;
+	$egresosTotal=0;
+ ?>	
 
 <?php foreach ($ventas as $v) { ?>
 	
 	<?php if ($i == 0){ 
-		$turnoid=$v->turno_id;
+		$fecha=substr($v->fecha,0,10);		
 		$i=$i+1; 
 	}?>
+	<?php 
 
+	$saldo= $v->total + $saldo; 
+	$ventasTotal= $v->total + $ventasTotal;
+
+	?>
 	<tr>
 		<td align="center"><?=date("d-m-Y", strtotime($v->fecha))?></td>
 		<td align="center"><?=$v->clientes->nombre?></td>
 		<td align="center"><?=$v->total?></td>
 		<td align="center"><?="-"?></td>					
-		<td align="center"><?="-"?></td>					
+		<td align="center"><?=$saldo ?></td>					
 	</tr>
-
-	<?php if ($v->turno_id != $turnoid){ ?>	
+	
+	<!--<?php if (substr($v->fecha,0,10) != $fecha){ ?> -->
 		
+
+	<!--<?php } ?>	-->
+	
+	<?php $fecha=substr($v->fecha,0,10); ?>
+	
+	
+<?php } ?>
+
+
 		<?php foreach ($egresos as $e) {?>
 			
-			<?php if ($turnoid == $e->turno_id){ ?>	
+			<?php $egresosTotal = $e->total + $egresosTotal; ?>
+
+			<?php if ($fecha == $e->fecha){ ?>	
 				
+				<?php $saldo = $saldo - $e->total; ?>
+
 				<tr>
 					<td align="center"><?=date("d-m-Y", strtotime($e->fecha))?></td>
-					<td align="center"><?=$e->otro?></td>
+					<?php if ($e->prod_id == ""){ ?> 
+						<td align="center"><?=$e->otro ?></td>
+					<?php } else { ?>
+						<td align="center"><?=$e->productos->nombre ?></td>
+					<?php } ?>
 					<td align="center"><?="-"?></td>					
 					<td align="center"><?=$e->total?></td>					
-					<td align="center"><?="-"?></td>					
+					<td align="center"><?=$saldo ?></td>					
 				</tr>	
-
+				
 			<?php } ?>	
 
 		<?php } ?>	
 
-	<?php } ?>	
 
-	<?php $turnoid = $v->turno_id;?>
-	
-<?php } ?>
 
-<?php foreach ($egresos as $e) {?>
-			
-	<?php if ($turnoid == $e->turno_id){ ?>	
-		<tr>
-			<td align="center"><?=date("d-m-Y", strtotime($e->fecha))?></td>
-			<td align="center"><?=$e->otro?></td>
-			<td align="center"><?="-"?></td>					
-			<td align="center"><?=$e->total?></td>					
-			<td align="center"><?="-"?></td>					
-		</tr>	
-	<?php } ?>	
-
-<?php } ?>	
 
 </table>
 
 <br>
 
+<p><strong>VENTAS: $<?=$ventasTotal?></strong></p>
+<p><strong>EGRESOS: $<?=$egresosTotal?></strong></p>
 <p><strong>SALDO: $<?=$saldo?></strong></p>
 

@@ -209,8 +209,9 @@ class VentasController extends Controller {
 		 	$hasta= $fields[0].'-'.$fields[1].'-'.($fields[2]+1);
 
 		 	
-			$ventas = Ventas::find()->where(['>=', 'fecha', $fecha_desde])->andWhere(['<=', 'fecha', $hasta])->all();
-			$egresos = Egresos::find()->where(['>=', 'fecha', $fecha_desde])->andWhere(['<=', 'fecha', $fecha_hasta])->all();
+			$ventas = Ventas::find()->where(['>=', 'fecha', $fecha_desde])->andWhere(['<=', 'fecha', $hasta])->orderBy("fecha")->all();
+
+			$egresos = Egresos::find()->where(['>=', 'fecha', $fecha_desde])->andWhere(['<=', 'fecha', $fecha_hasta])->orderBy("fecha")->all();;
 
 			//var_dump($egresos);die;
 
