@@ -9,6 +9,7 @@ use app\models\Egresos;
 use app\models\Turno;
 use app\models\VentasDetalle;
 use Yii;
+use mPDF;
 use yii\data\ActiveDataProvider;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
@@ -193,8 +194,35 @@ class VentasController extends Controller {
 	
 	public function actionMovimientosCaja() {
 
+		$model = new Ventas();		
 
-		return $this->render('movimientos_caja');
+		if (Yii::$app->request->post()) {
+
+			$post = Yii::$app->request->post();
+
+			$fecha_desde = date('Y-m-d', strtotime($post['fecha_desde']));
+			$fecha_hasta = date('Y-m-d', strtotime($post['fecha_hasta']));
+
+			
+			$ventas = Ventas::find()->where(['>=', 'fecha', $fecha_desde])->andWhere(['<=', 'fecha', $fecha_hasta])->all();
+
+			$egresos = Egresos::find()->where(['>=', 'fecha', $fecha_desde])->andWhere(['<=', 'fecha', $fecha_hasta])->all();
+
+			$mpdf = new mPDF('utf-8', 'A4');
+			$mpdf->WriteHTML($this->renderPartial('imprimir_movimientos_caja', [
+				'ventas' => $ventas,
+				'egresos' => $egresos,
+				'fecha_desde' => $fecha_desde,
+				'fecha_hasta' => $fecha_hasta,
+			]));
+			$mpdf->Output();
+			exit;
+
+		}
+
+		return $this->render('movimientos_caja',[
+				'model'=>$model,
+			]);
 
 
 	}

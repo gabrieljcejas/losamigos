@@ -22,6 +22,7 @@ use yii\jui\DatePicker;
                 'dateFormat' => 'php:d-m-Y',
                 'options' => [
                     'class' => 'form-control',
+                    'readOnly' => 'readOnly',
                 ],
             ]);
         ?>
@@ -39,7 +40,7 @@ use yii\jui\DatePicker;
     <?= $form->field($model, 'caja_inicial')->textInput(['maxlength' => true]) ?>
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? 'Guardar' : 'Modificar', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

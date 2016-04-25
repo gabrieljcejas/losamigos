@@ -37,7 +37,9 @@ class Ventas extends \yii\db\ActiveRecord
     /**
      * @Propiedades 
      */    
-    
+    public $fecha_desde;
+    public $fecha_hasta;
+
      
 
     /**

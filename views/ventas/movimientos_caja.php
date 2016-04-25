@@ -23,6 +23,7 @@ $this->params['breadcrumbs'][] = 'Reportes / ' . $this->title;
 				'dateFormat' => 'php:d-m-Y',
 				'options' => [
 					'class' => 'form-control',
+					'readOnly' => 'readOnly',
 				],
 			]);
 		?>
@@ -35,11 +36,11 @@ $this->params['breadcrumbs'][] = 'Reportes / ' . $this->title;
      <div class="input-group">
       	<?=
 			DatePicker::widget([
-
 				'name' => 'fecha_hasta',
 				'dateFormat' => 'php:d-m-Y',
 				'options' => [
 					'class' => 'form-control',
+					'readOnly' => 'readOnly',
 				],
 			]);
 		?>

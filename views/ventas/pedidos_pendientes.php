@@ -26,7 +26,12 @@ $this->title = 'Pedidos Pendientes';
         'columns' => [
             //['class' => 'yii\grid\SerialColumn'],
             'id',
-            'fecha',
+            [
+                'attribute'=>'fecha',
+                'value'=> function ($model) {
+                    return date("d-m-Y H:i:s",strtotime($model->fecha));
+                }
+            ],
             'clientes.nombre',
             'clientes.domicilio',                        
             [
