@@ -23,7 +23,6 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-<<<<<<< HEAD
             'id',
             [
                 'attribute'=>'fecha',
@@ -31,11 +30,6 @@ $this->params['breadcrumbs'][] = $this->title;
                     return date("d-m-Y",strtotime($model->fecha));
                 }
             ],
-=======
-
-            'id',
-            'fecha',
->>>>>>> origin/master
             'hora_inicio',
             'hora_fin',
             'cant_pollo',

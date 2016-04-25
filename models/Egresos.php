@@ -63,12 +63,9 @@ class Egresos extends \yii\db\ActiveRecord
             'turno_id' => 'Turno'
         ];
     }
-<<<<<<< HEAD
 
 
     public function getProductos() {
         return $this->hasOne(Productos::className(), ['id' => 'prod_id']);
     }
-=======
->>>>>>> origin/master
 }

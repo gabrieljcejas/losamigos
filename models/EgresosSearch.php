@@ -73,11 +73,8 @@ class EgresosSearch extends Egresos
 
         $query->andFilterWhere(['like', 'obs', $this->obs]);
 
-<<<<<<< HEAD
         $query->orderBy('id DESC');
 
-=======
->>>>>>> origin/master
         return $dataProvider;
     }
 }

@@ -22,11 +22,7 @@ Tabs::widget([
 		],
 		[
 			'label' => 'Historial Ventas',
-<<<<<<< HEAD
 			'content' => $this->render('historial_ventas', ['historialventas'=>$historialventas,'totalventas'=>$totalventas,'totalegresos'=>$totalegresos,'totalproductosvendidos'=>$totalproductosvendidos]),
-=======
-			'content' => $this->render('historial_ventas', ['historialventas'=>$historialventas,'totalventas'=>$totalventas,'totalegresos'=>$totalegresos]),
->>>>>>> origin/master
 		],
 	],
 

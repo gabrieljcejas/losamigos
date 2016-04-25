@@ -23,7 +23,6 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-<<<<<<< HEAD
             'id',
             [
                 'attribute'=>'fecha',
@@ -37,12 +36,6 @@ $this->params['breadcrumbs'][] = $this->title;
                     return $model->productos->nombre;
                 }
             ],          
-=======
-
-            'id',
-            'fecha',
-            'prod_id',
->>>>>>> origin/master
             'otro',
             //'forma_pago',
             // 'obs',

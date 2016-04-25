@@ -43,7 +43,6 @@ echo Nav::widget([
 		['label' => 'Clientes', 'url' => ['/clientes/index']],
 		//['label' => 'Proveedores', 'url' => ['/proveedores/index']],
 		['label' => 'Productos', 'url' => ['/productos/index']],
-<<<<<<< HEAD
 		['label' => 'Reportes', 'url' => ['#'],
 			'items' => [
 				['label' => 'Movimientos de Caja', 'url' => ['ventas/movimientos-caja']],				
@@ -51,8 +50,6 @@ echo Nav::widget([
 				//['label' => 'Estado de Cuenta', 'url' => ['/proveedor/index']],
 			],
 		],
-=======
->>>>>>> origin/master
 
 		//['label' => 'Promos', 'url' => ['/site/promos']],
 		Yii::$app->user->isGuest ? (

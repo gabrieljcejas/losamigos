@@ -69,11 +69,8 @@ class TurnoSearch extends Turno
         $query->andFilterWhere(['like', 'hora_inicio', $this->hora_inicio])
             ->andFilterWhere(['like', 'hora_fin', $this->hora_fin]);
 
-<<<<<<< HEAD
         $query->orderBy('id DESC');
 
-=======
->>>>>>> origin/master
         return $dataProvider;
     }
 }

@@ -1,10 +1,6 @@
 <?php
 
-<<<<<<< HEAD:models/ClientesSearch.php
 namespace app\models;
-=======
-namespace app\Controllers;
->>>>>>> origin/master:controllers/ClientesSearch.php
 
 use Yii;
 use yii\base\Model;
@@ -72,11 +68,8 @@ class ClientesSearch extends Clientes
             ->andFilterWhere(['like', 'telefono', $this->telefono])
             ->andFilterWhere(['like', 'gps', $this->gps])
             ->andFilterWhere(['like', 'obs', $this->obs]);
-<<<<<<< HEAD:models/ClientesSearch.php
 
         $query->orderBy('id DESC');
-=======
->>>>>>> origin/master:controllers/ClientesSearch.php
 
         return $dataProvider;
     }

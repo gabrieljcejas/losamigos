@@ -22,16 +22,12 @@ $this->title = 'Historial de Ventas';
         'columns' => [
             //['class' => 'yii\grid\SerialColumn'],
             'id',
-<<<<<<< HEAD
             [
                 'attribute'=>'fecha',
                 'value'=> function ($model) {
                     return date("d-m-Y H:i:s",strtotime($model->fecha));
                 }
             ],
-=======
-            'fecha',
->>>>>>> origin/master
             'clientes.nombre',
             'clientes.domicilio',                        
             [
@@ -54,7 +50,6 @@ $this->title = 'Historial de Ventas';
 
 <?php $cajafinal = $_SESSION["caja"] + $totalventas - $totalegresos ?>
 
-<<<<<<< HEAD
 <!--
  ---- CANTIDAD DE PRODUCTOS VENDIDOS 
  -->     
@@ -115,40 +110,3 @@ $this->title = 'Historial de Ventas';
 
 <?php Pjax::end()?>
 
-=======
-<div class="row">
-    <div class="col-md-4">
-        <h3>Resumen</h3>
-        <table class="table table-striped" >
-            
-            <tr>
-                <td><strong>CAJA INICIAL:</strong></td>
-                <td><strong>$<?=$_SESSION["caja"]?></strong></td>
-            </tr>
-            
-            <tr>
-                <td><strong>VENTAS: </strong></td>
-                <td><strong>$<?= $totalventas ?></strong></td>
-            </tr>
-            
-            <tr>
-                <td><strong>COMPRAS:</strong></td>
-                <td><strong>$<?= $totalegresos ?></strong></td>
-            </tr>
-
-            <tr>
-                <td><strong>CAJA FINAL:</strong></td>
-                <td><strong>$<?= $cajafinal ?></strong></td>
-            </tr>
-
-        </table>
-    </div>    
-</div>
-    
-<div class="row">
-    <h3>Cantidad de Productos Vendidos</h3>
-
-
-</div>
- <?php Pjax::end()?>
->>>>>>> origin/master

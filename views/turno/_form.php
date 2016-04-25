@@ -2,10 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-<<<<<<< HEAD
 use yii\jui\DatePicker;
-=======
->>>>>>> origin/master
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Turno */
@@ -16,7 +13,6 @@ use yii\jui\DatePicker;
 
     <?php $form = ActiveForm::begin(); ?>
 
-<<<<<<< HEAD
     <label>Fecha</label>
      <div class="input-group">
         <?=
@@ -31,9 +27,6 @@ use yii\jui\DatePicker;
         ?>
         <span class="input-group-addon glyphicon glyphicon-calendar"></span>
     </div><br>
-=======
-    <?= $form->field($model, 'fecha')->textInput() ?>
->>>>>>> origin/master
 
     <?= $form->field($model, 'hora_inicio')->textInput(['maxlength' => true]) ?>
 

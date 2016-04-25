@@ -68,24 +68,14 @@ class EgresosController extends Controller
         $model = new Egresos();
 
         if ($model->load(Yii::$app->request->post())) {
-<<<<<<< HEAD
             $turno = Turno::find()->orderBy(['id' => SORT_DESC])->one();                        
             $model->fecha = date('Y-m-d',strtotime($model->fecha));
             $model->turno_id = $turno->id;
-=======
-            $turno = Turno::find()->orderBy(['id' => SORT_DESC])->one();
-            $model->fecha= date("Y-m-d",strtotime($model->fecha));
-            $model->turno_id= $turno->id;
->>>>>>> origin/master
             if (!$model->save()) {
                 throw new \yii\web\HttpException(400, 'Error al guardar');
             }
 
-<<<<<<< HEAD
             return $this->redirect(['create']);
-=======
-            return $this->redirect(['view', 'id' => $model->id]);
->>>>>>> origin/master
         } else {
 
             $listproductos = Productos::find()->all();

@@ -114,7 +114,6 @@ use kartik\select2\Select2;
                         <?= $form->field($model, 'obs')->textArea(['rows' => '2']) ?>   
                         
                         <div class="col-md-2">
-<<<<<<< HEAD
                             <!--<?= $form->field($model, 'envio_domicilio')->checkBox(['class'=>'form-control']) ?>-->
                             <?=Html::radio("envio",false,["label"=>"Envio","uncheck"=>true,"value"=>1,'class'=>'form-control'])?>
                         </div>                            
@@ -122,13 +121,6 @@ use kartik\select2\Select2;
                         <div class="col-md-2">
                             <!--<?= $form->field($model, 'retira')->checkBox(['class'=>'form-control']) ?>-->
                             <?=Html::radio("envio",false,["label"=>"Retira","uncheck"=>true,"value"=>0,'class'=>'form-control'])?>
-=======
-                            <?= $form->field($model, 'envio_domicilio')->checkBox(['class'=>'form-control']) ?>
-                        </div>                            
-
-                        <div class="col-md-2">
-                            <?= $form->field($model, 'retira')->checkBox(['class'=>'form-control']) ?>
->>>>>>> origin/master
                         </div>                            
 
                         <div class="col-md-3">
@@ -196,10 +188,7 @@ use kartik\select2\Select2;
         });  
     }
 
-<<<<<<< HEAD
   
-=======
->>>>>>> origin/master
     // cuando cambia la cantidad cambia el precio total y suma el precio total de la venta
     function myFunction(nrofila){    
        
@@ -207,11 +196,6 @@ use kartik\select2\Select2;
         var total=0;
         var cantidad=0;
         var precio_venta=0;
-<<<<<<< HEAD
-=======
-
-
->>>>>>> origin/master
     
         $("input[name='cantidad[]']").each(function(){      
 
@@ -250,7 +234,6 @@ use kartik\select2\Select2;
           
 
             var html='';                        
-<<<<<<< HEAD
             var nro_fila = $('#tabla_ventas >tbody >tr').length + 1;            
             var boton_prodid = $(this).data("ide");            
             var flag = false;
@@ -288,24 +271,6 @@ use kartik\select2\Select2;
 
             //agrego la suma de la columna precio total al input total
             calculartotal();
-=======
-            var nro_fila = $('#tabla_ventas >tbody >tr').length + 1;
-            
-
-            html+="<tr id='del-" + nro_fila + "'>";
-                html+="<td><input type='text' id='cantidad"+ nro_fila +"' name='cantidad[]' value='1' class='form-control' onkeyup='myFunction("+nro_fila+")' ></td>";                
-                html+="<td><input type='text' readOnly='readOnly' name='producto[]' value='" + $(this).data("nombre") + "' class='form-control'><input type='hidden' name='producto_id[]' value='" + $(this).data("ide") + "' class='form-control'></td>";
-                html+="<td><input type='text' readOnly='readOnly'  id='precio_venta" + nro_fila + "' name='precio_venta[]' value='" + $(this).data("precio_venta") + "' class='form-control'></td>";
-                html+="<td><input type='text'  id='total" + nro_fila + "' name='total[]' value='" + $(this).data("precio_venta") + "' class='form-control'  readOnly='readOnly'></td>";
-                html+="<td><a id='btn_borrar_cuenta' onClick='borrarfila(" + nro_fila + ");' class='btn btn-default glyphicon glyphicon-trash'></a></td>";
-            html+="</tr>";
-
-            $("#tabla_ventas").append(html);               
-
-
-            //agrego la suma de la columna precio total al input total
-           calculartotal();
->>>>>>> origin/master
                          
         });
 

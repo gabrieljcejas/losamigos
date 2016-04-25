@@ -136,7 +136,6 @@ class Ventas extends \yii\db\ActiveRecord
     }
 
     /**
-<<<<<<< HEAD
     **CALCULO TOTAL VENTAS POR CADA PRODUCTO EJ: PROMO, POLLO, PAPA, ENSALADAS, BEBIDAS
     **/
     public function CalcularCantidadProductosVendidos($turno){
@@ -167,33 +166,6 @@ class Ventas extends \yii\db\ActiveRecord
 
         return  $listado;
    }
-=======
-    **CALCULO TOTAL COMPRAS DE LA FECHA POR TURNO    
-    **/
-    /*public function CalcularCantidadProductosVendidos($turno){
-
-        $ventas= Ventas::find()->where(['entregado'=>1])->andWhere(['turno_id'=>$turno->id])->orderBy('id DESC')->all();
-        
-        $productos = Productos::find()->all();
-
-        
-        //armo array
-        foreach ($productos as $p) {
-            $suma=0;
-            foreach ($ventas as $v) {
-               
-                if ($p->id == $v->prod_id){                     
-                    $listado['nombre']= $p->nombre;
-                    $listado['cantidad']= $v->cantidad;           
-                }
-
-            }
-
-        }       
-
-        return $totalegresos;
-    }*/
->>>>>>> origin/master
 
 
 }

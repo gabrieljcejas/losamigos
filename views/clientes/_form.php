@@ -15,15 +15,9 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'nombre')->textInput(['maxlength' => true]) ?>
 
-<<<<<<< HEAD
     <!--<?= $form->field($model, 'dni')->textInput() ?>-->
 
     <?= $form->field($model, 'domicilio')->textInput(['maxlength' => true]) ?>
-=======
-    <?= $form->field($model, 'dni')->textInput() ?>
-
-    <!--<?= $form->field($model, 'domicilio')->textInput(['maxlength' => true]) ?>-->
->>>>>>> origin/master
 
     <?= $form->field($model, 'telefono')->textInput(['maxlength' => true]) ?>
 

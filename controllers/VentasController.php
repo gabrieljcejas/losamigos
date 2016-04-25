@@ -55,7 +55,6 @@ class VentasController extends Controller {
 			$date = date('Y-m-d h:i:s a', time());
 			$model->fecha = $date;			
 			
-<<<<<<< HEAD
 			//turno recibido de session
 			$model->turno_id = $_SESSION["turno"];
 
@@ -73,17 +72,6 @@ class VentasController extends Controller {
 				$model->retira = 1;
 			}
 			
-=======
-			$model->turno_id = $_SESSION["turno"];
-
-			if ($model->cliente_id == 1){
-				$model->entregado = 1;
-			}
-			else{
-				$model->envio_domicilio = 1;
-			}
-			//var_dump($post);die;
->>>>>>> origin/master
 			if (!$model->save()) {
 				throw new \yii\web\HttpException(400, 'Error al guardar la venta');
 			}
@@ -164,18 +152,13 @@ class VentasController extends Controller {
           'query' => $listpedidos,
         ]);        		
 
-<<<<<<< HEAD
 		/**
 		**+++++++++++++CALCULOS ++++++++++++++++++++++
 		**/
-=======
-		// traigo toos los productos
->>>>>>> origin/master
 		$productos = Productos::find()->all();
 				
 		$totalventas = $model->CalcularTotalVentas($turno);
 		
-<<<<<<< HEAD
 		$totalegresos = $model->CalcularTotalEgresos($turno);
 		
 		$totalproductosvendidos = $model->CalcularCantidadProductosVendidos($turno);
@@ -184,11 +167,6 @@ class VentasController extends Controller {
 		/**************************************************************************/
 		
 
-=======
-		$totalegresos = $model->CalcularTotalEgresos($turno); 
-		
-		
->>>>>>> origin/master
 		//traigo todos los dni del cliente		
 		$list_clientes = Clientes::find()->orderBy('dni')->all();	
 
@@ -205,19 +183,14 @@ class VentasController extends Controller {
 			'pedidospendientes'=>$pedidospendientes,
 			'queda'=>$queda,
 			'totalventas'=>$totalventas,
-<<<<<<< HEAD
 			'totalegresos'=>$totalegresos,
 			'totalproductosvendidos'=>$totalproductosvendidos,
-=======
-			'totalegresos'=>$totalegresos			
->>>>>>> origin/master
 		]);	
 			
 					
 	}
 
 	
-<<<<<<< HEAD
 	public function actionMovimientosCaja() {
 
 
@@ -227,8 +200,6 @@ class VentasController extends Controller {
 	}
 
 
-=======
->>>>>>> origin/master
 	public function actionPedidoListo() {
 		
 		$post = Yii::$app->request->post();

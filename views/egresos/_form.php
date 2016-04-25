@@ -3,11 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use kartik\select2\Select2; 
-<<<<<<< HEAD
 use yii\jui\DatePicker;
-=======
-
->>>>>>> origin/master
 /* @var $this yii\web\View */
 /* @var $model app\models\Egresos */
 /* @var $form yii\widgets\ActiveForm */
@@ -19,7 +15,6 @@ use yii\jui\DatePicker;
 
     <div class="row">
         <div class="col-md-4">
-<<<<<<< HEAD
            <label>Fecha</label>
              <div class="input-group">
                 <?=
@@ -36,11 +31,6 @@ use yii\jui\DatePicker;
             </div>
         </div>
     </div><br>
-=======
-            <?= $form->field($model, 'fecha')->textInput() ?>
-        </div>
-    </div>
->>>>>>> origin/master
 
     <div class="row">        
         <div class="col-md-4">
