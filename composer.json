@@ -20,8 +20,7 @@
         "yiisoft/yii2-swiftmailer": "*",       
         "kartik-v/yii2-widget-select2": "@dev",
         "yiisoft/yii2-jui": "^2.0",
-      
-        
+        "mpdf/mpdf": "*",
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

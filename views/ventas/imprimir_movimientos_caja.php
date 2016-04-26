@@ -3,7 +3,7 @@
 
 <br><br><br>
 
-<table border="1">
+<table border="1" width="700">
 
 <tr>
 	<th>Fecha</th>
@@ -13,10 +13,60 @@
 	<th>Saldo</th>
 </tr>
 
-<!--<?php foreach ($ventas as $v) {?>
+<?php $i=0; ?>	
 
+<?php foreach ($ventas as $v) { ?>
 	
-<?php } ?>-->
+	<?php if ($i == 0){ 
+		$turnoid=$v->turno_id;
+		$i=$i+1; 
+	}?>
+
+	<tr>
+		<td align="center"><?=date("d-m-Y", strtotime($v->fecha))?></td>
+		<td align="center"><?=$v->clientes->nombre?></td>
+		<td align="center"><?=$v->total?></td>
+		<td align="center"><?="-"?></td>					
+		<td align="center"><?="-"?></td>					
+	</tr>
+
+	<?php if ($v->turno_id != $turnoid){ ?>	
+		
+		<?php foreach ($egresos as $e) {?>
+			
+			<?php if ($turnoid == $e->turno_id){ ?>	
+				
+				<tr>
+					<td align="center"><?=date("d-m-Y", strtotime($e->fecha))?></td>
+					<td align="center"><?=$e->otro?></td>
+					<td align="center"><?="-"?></td>					
+					<td align="center"><?=$e->total?></td>					
+					<td align="center"><?="-"?></td>					
+				</tr>	
+
+			<?php } ?>	
+
+		<?php } ?>	
+
+	<?php } ?>	
+
+	<?php $turnoid = $v->turno_id;?>
+	
+<?php } ?>
+
+<?php foreach ($egresos as $e) {?>
+			
+	<?php if ($turnoid == $e->turno_id){ ?>	
+		<tr>
+			<td align="center"><?=date("d-m-Y", strtotime($e->fecha))?></td>
+			<td align="center"><?=$e->otro?></td>
+			<td align="center"><?="-"?></td>					
+			<td align="center"><?=$e->total?></td>					
+			<td align="center"><?="-"?></td>					
+		</tr>	
+	<?php } ?>	
+
+<?php } ?>	
 
 </table>
 

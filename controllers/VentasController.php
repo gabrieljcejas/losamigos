@@ -203,10 +203,16 @@ class VentasController extends Controller {
 			$fecha_desde = date('Y-m-d', strtotime($post['fecha_desde']));
 			$fecha_hasta = date('Y-m-d', strtotime($post['fecha_hasta']));
 
-			
-			$ventas = Ventas::find()->where(['>=', 'fecha', $fecha_desde])->andWhere(['<=', 'fecha', $fecha_hasta])->all();
+			// sumo un dia a fecha hasta por que no me trae los datos hasta la ultima fecha, ej: si fecha_desde es 10-04-2016 y fecha_hasta 14-04-2016 me trae hasta el 13-04-2016, la ultima fecha no me trae y no se por que mierda. SOLO PASA EN VENTAS seguro es por que el campo es datetime
+			$h = $fecha_hasta;
+		 	$fields = explode('-', $h);
+		 	$hasta= $fields[0].'-'.$fields[1].'-'.($fields[2]+1);
 
+		 	
+			$ventas = Ventas::find()->where(['>=', 'fecha', $fecha_desde])->andWhere(['<=', 'fecha', $hasta])->all();
 			$egresos = Egresos::find()->where(['>=', 'fecha', $fecha_desde])->andWhere(['<=', 'fecha', $fecha_hasta])->all();
+
+			//var_dump($egresos);die;
 
 			$mpdf = new mPDF('utf-8', 'A4');
 			$mpdf->WriteHTML($this->renderPartial('imprimir_movimientos_caja', [
@@ -217,7 +223,7 @@ class VentasController extends Controller {
 			]));
 			$mpdf->Output();
 			exit;
-
+			
 		}
 
 		return $this->render('movimientos_caja',[

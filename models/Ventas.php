@@ -87,6 +87,9 @@ class Ventas extends \yii\db\ActiveRecord
         return $this->hasOne(Clientes::className(), ['id' => 'cliente_id']);
     }
    
+    public function getTurno() {
+        return $this->hasOne(Turno::className(), ['id' => 'turno_id']);
+    }
 
     public function getVentasDetalle() {
         return $this->hasMany(VentasDetalle::className(), ['venta_id' => 'id']);
