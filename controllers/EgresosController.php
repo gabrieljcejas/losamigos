@@ -84,6 +84,8 @@ class EgresosController extends Controller
                 $productos[$p['id']] = $p['nombre'];
             }   
 
+            $model->fecha = date('d-m-Y');
+            
             return $this->render('create', [
                 'model' => $model,
                 'productos'=>$productos,

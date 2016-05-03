@@ -1,7 +1,7 @@
 <div><h1>Movimientos de Caja</h1><label>Fecha desde: <?=date("d-m-Y", strtotime($fecha_desde)) . " hasta " . date("d-m-Y", strtotime($fecha_hasta))?></label></div>
 <hr>
 
-<br><br><br>
+<br><br>
 
 <table border="1" width="700">
 
@@ -22,42 +22,27 @@
 
 <?php foreach ($ventas as $v) { ?>
 	
-	<?php if ($i == 0){ 
-		$fecha=substr($v->fecha,0,10);		
-		$i=$i+1; 
-	}?>
 	<?php 
-
-	$saldo= $v->total + $saldo; 
-	$ventasTotal= $v->total + $ventasTotal;
-
+		if ($i == 0){ 
+			$fecha = substr($v->fecha,0,10);					
+			$i = $i + 1; 		
+		}
+		$saldo = $v->total + $saldo; 
+		$ventasTotal = $v->total + $ventasTotal;
+		$flag = false;	
 	?>
-	<tr>
-		<td align="center"><?=date("d-m-Y", strtotime($v->fecha))?></td>
-		<td align="center"><?=$v->clientes->nombre?></td>
-		<td align="center"><?=$v->total?></td>
-		<td align="center"><?="-"?></td>					
-		<td align="center"><?=$saldo ?></td>					
-	</tr>
 	
-	<!--<?php if (substr($v->fecha,0,10) != $fecha){ ?> -->
+	<?php if (substr($v->fecha, 0,10) != $fecha){ ?>
 		
-
-	<!--<?php } ?>	-->
-	
-	<?php $fecha=substr($v->fecha,0,10); ?>
-	
-	
-<?php } ?>
-
-
 		<?php foreach ($egresos as $e) {?>
-			
-			<?php $egresosTotal = $e->total + $egresosTotal; ?>
 
 			<?php if ($fecha == $e->fecha){ ?>	
 				
-				<?php $saldo = $saldo - $e->total; ?>
+				<?php $egresosTotal = $e->total + $egresosTotal; ?>
+
+				<?php $flag = true; ?>
+				
+				<?php $saldo = $saldo - $e->total;?>
 
 				<tr>
 					<td align="center"><?=date("d-m-Y", strtotime($e->fecha))?></td>
@@ -71,18 +56,28 @@
 					<td align="center"><?=$saldo ?></td>					
 				</tr>	
 				
-			<?php } ?>	
+			<?php } ?>			
 
 		<?php } ?>	
+		
 
-
-
+		
+	<?php } $fecha = substr($v->fecha, 0,10); ?>	
+	
+	<tr>
+		<td align="center"><?=date("d-m-Y", strtotime($v->fecha))?></td>
+		<td align="center"><?=$v->clientes->nombre?></td>
+		<td align="center"><?=$v->total?></td>
+		<td align="center"><?="-"?></td>					
+		<td align="center"><?=$saldo ?></td>					
+	</tr>
+	
+	
+<?php } ?>
 
 </table>
-
 <br>
-
-<p><strong>VENTAS: $<?=$ventasTotal?></strong></p>
-<p><strong>EGRESOS: $<?=$egresosTotal?></strong></p>
+<p><strong>DEBE: $<?=$ventasTotal?></strong></p>
+<p><strong>HABER: $<?=$egresosTotal?></strong></p>
 <p><strong>SALDO: $<?=$saldo?></strong></p>
 

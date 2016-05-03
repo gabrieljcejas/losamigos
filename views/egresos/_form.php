@@ -12,7 +12,7 @@ use yii\jui\DatePicker;
 <div class="egresos-form">
     
     <?php $form = ActiveForm::begin(); ?>
-
+     
     <div class="row">
         <div class="col-md-4">
            <label>Fecha</label>
@@ -25,6 +25,7 @@ use yii\jui\DatePicker;
                         'options' => [
                             'class' => 'form-control',
                             'readOnly' => 'readOnly',
+
                         ],
                     ]);
                 ?>
