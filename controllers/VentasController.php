@@ -163,8 +163,7 @@ class VentasController extends Controller {
 		$totalegresos = $model->CalcularTotalEgresos($turno);
 		
 		$totalproductosvendidos = $model->CalcularCantidadProductosVendidos($turno);
-
-		//var_dump($totalproductosvendidos);die;
+		
 		/**************************************************************************/
 		
 
@@ -191,10 +190,12 @@ class VentasController extends Controller {
 					
 	}
 
-	
-	public function actionMovimientosCaja() {
+	/**
+	**************************** C  O  N  S  U  L  T A S  ***************
+	**/
 
-		$model = new Ventas();		
+	public function actionConsultaMovimientosCaja() {
+
 
 		if (Yii::$app->request->post()) {
 
@@ -227,13 +228,87 @@ class VentasController extends Controller {
 			
 		}
 
-		return $this->render('movimientos_caja',[
-				'model'=>$model,
+		$titulo = "Consulta Movimientos de Caja";
+		return $this->render('_consulta_entre_fechas',[
+				'titulo'=>$titulo,
 			]);
 
 
 	}
 
+
+
+	public function actionConsultaEgresos() {
+
+
+		if (Yii::$app->request->post()) {
+
+			$post = Yii::$app->request->post();
+
+			$fecha_desde = date('Y-m-d', strtotime($post['fecha_desde']));
+
+			$fecha_hasta = date('Y-m-d', strtotime($post['fecha_hasta']));
+
+			$egresos = Egresos::find()->where(['>=', 'fecha', $fecha_desde])->andWhere(['<=', 'fecha', $fecha_hasta])->orderBy("fecha")->all();
+
+			
+			$mpdf = new mPDF('utf-8', 'A4');
+			$mpdf->WriteHTML($this->renderPartial('imprimir_egresos', [
+				'ventas' => $ventas,
+				'egresos' => $egresos,
+				'fecha_desde' => $fecha_desde,
+				'fecha_hasta' => $fecha_hasta,
+			]));
+			$mpdf->Output();
+			exit;
+			
+		}
+
+		$titulo = "Consulta Egresos";
+		return $this->render('_consulta_entre_fechas',[
+				'titulo'=>$titulo,
+			]);
+
+
+	}
+
+	public function actionConsultaVentas() {
+
+
+		if (Yii::$app->request->post()) {
+
+			$post = Yii::$app->request->post();
+
+			$fecha_desde = date('Y-m-d', strtotime($post['fecha_desde']));
+			$fecha_hasta = date('Y-m-d', strtotime($post['fecha_hasta']));
+
+			// sumo un dia a fecha hasta por que no me trae los datos hasta la ultima fecha, ej: si fecha_desde es 10-04-2016 y fecha_hasta 14-04-2016 me trae hasta el 13-04-2016, la ultima fecha no me trae y no se por que mierda. SOLO PASA EN VENTAS seguro es por que el campo es datetime
+			$h = $fecha_hasta;
+		 	$fields = explode('-', $h);
+		 	$hasta= $fields[0].'-'.$fields[1].'-'.($fields[2]+1);
+
+		 	
+			$ventas = Ventas::find()->where(['>=', 'fecha', $fecha_desde])->andWhere(['<=', 'fecha', $hasta])->orderBy("fecha")->all();
+
+			
+			$mpdf = new mPDF('utf-8', 'A4');
+			$mpdf->WriteHTML($this->renderPartial('imprimir_ventas', [
+				'ventas' => $ventas,
+				'egresos' => $egresos,
+				'fecha_desde' => $fecha_desde,
+				'fecha_hasta' => $fecha_hasta,
+			]));
+			$mpdf->Output();
+			exit;
+			
+		}
+		$titulo = "Consulta Ventas";
+		return $this->render('_consulta_entre_fechas',[
+				'titulo'=>$titulo,
+			]);
+
+
+	}
 
 	public function actionPedidoListo() {
 		

@@ -75,6 +75,32 @@
 	
 <?php } ?>
 
+<?php foreach ($egresos as $e) {?>
+
+	<?php if ($fecha == $e->fecha){ ?>	
+		
+		<?php $egresosTotal = $e->total + $egresosTotal; ?>
+
+		<?php $flag = true; ?>
+		
+		<?php $saldo = $saldo - $e->total;?>
+
+		<tr>
+			<td align="center"><?=date("d-m-Y", strtotime($e->fecha))?></td>
+			<?php if ($e->prod_id == ""){ ?> 
+				<td align="center"><?=$e->otro ?></td>
+			<?php } else { ?>
+				<td align="center"><?=$e->productos->nombre ?></td>
+			<?php } ?>
+			<td align="center"><?="-"?></td>					
+			<td align="center"><?=$e->total?></td>					
+			<td align="center"><?=$saldo ?></td>					
+		</tr>	
+		
+	<?php } ?>			
+
+<?php } ?>	
+
 </table>
 <br>
 <p><strong>DEBE: $<?=$ventasTotal?></strong></p>

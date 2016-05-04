@@ -45,7 +45,9 @@ echo Nav::widget([
 		['label' => 'Productos', 'url' => ['/productos/index']],
 		['label' => 'Reportes', 'url' => ['#'],
 			'items' => [
-				['label' => 'Movimientos de Caja', 'url' => ['ventas/movimientos-caja']],				
+				['label' => 'Movimientos de Caja', 'url' => ['ventas/consulta-movimientos-caja']],
+				['label' => 'Egresos', 'url' => ['ventas/consulta-egresos']],
+				['label' => 'Ventas', 'url' => ['ventas/consulta-ventas']],
 				//'<li class="divider"></li>',
 				//['label' => 'Estado de Cuenta', 'url' => ['/proveedor/index']],
 			],

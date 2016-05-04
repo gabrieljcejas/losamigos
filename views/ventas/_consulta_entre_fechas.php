@@ -5,7 +5,7 @@ use yii\jui\DatePicker;
 use yii\widgets\ActiveForm;
 
 
-$this->title = $accion;
+$this->title = $titulo;
 $this->params['breadcrumbs'][] = 'Reportes / ' . $this->title;
 ?>
 
