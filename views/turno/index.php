@@ -22,7 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+            //['class' => 'yii\grid\SerialColumn'],
             'id',
             [
                 'attribute'=>'fecha',
@@ -30,10 +30,8 @@ $this->params['breadcrumbs'][] = $this->title;
                     return date("d-m-Y",strtotime($model->fecha));
                 }
             ],
-            'hora_inicio',
-            'hora_fin',
             'cant_pollo',
-            // 'sobra_pollo',
+            'caja_inicial',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

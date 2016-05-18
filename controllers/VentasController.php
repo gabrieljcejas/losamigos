@@ -79,14 +79,13 @@ class VentasController extends Controller {
 			else{			
 				//una ves que guardo en tabla ventas 
 				// recorro la tabla de ventas para grabar en ventadetalles
-				foreach ($post['cantidad'] as $key => $value) {
-					/*echo "id:".$model->id." cantidad ".$post['cantidad'][$key]." prod_id ".$post['producto_id'][$key]." precio venta ".$post['precio_venta'][$key];die;*/
+				foreach ($post['cantidad'] as $key => $value) {					
 					$ventadetalle = new VentasDetalle();
 					$ventadetalle->venta_id = $model->id;
 					$ventadetalle->cant = $post['cantidad'][$key];
 					$ventadetalle->prod_id = $post['producto_id'][$key];					
 					$ventadetalle->precio = $post['precio_venta'][$key];					
-					if (!$ventadetalle->save()) {
+					if (!$ventadetalle->save()) {						
 						throw new \yii\web\HttpException(400, 'Error al guardar ventas detalle');
 					}
 					else{
@@ -98,39 +97,8 @@ class VentasController extends Controller {
 						*** DESCUENTO DE LA TABLA TURNO LA CANTIDAD DE SOBRA
 						**/
 						$turno = Turno::find()->where(['id'=>$_SESSION["turno"]])->one();
-						
-						switch ($producto_id) {
-
-							case '1': // PROMO								
-								$turno->sobra_pollo = $turno->sobra_pollo - $cantidad;								
-								if (!$turno->save()) {
-									throw new \yii\web\HttpException(400, 'Error al descontar del la tabla turno cantidad pollo');
-								}	
-							break;
-
-							case '2': // POLLO								
-								$turno->sobra_pollo = $turno->sobra_pollo - $cantidad;								
-								if (!$turno->save()) {
-									throw new \yii\web\HttpException(400, 'Error al descontar del la tabla cantidad pollo');
-								}	
-							break;
-
-							case '3': // MEDIA POLLO
-								$turno->sobra_pollo = $turno->sobra_pollo - ($cantidad*0.5);
-								if (!$turno->save()) {
-									throw new \yii\web\HttpException(400, 'Error al descontar del la tabla cantidad pollo');
-								}	
-							break;
-							
-							
-							default:								
-								
-								
-							break;
-						}
-												
-						
-
+						//resto del stock y del turno
+						$this->restarStock($producto_id,$turno,$cantidad);
 					}					
 				}
 				
@@ -141,7 +109,10 @@ class VentasController extends Controller {
 		$turno = Turno::find()->where(['id'=>$_SESSION["turno"]])->one();
 		$queda = $turno->sobra_pollo;		
 		// Historial Ventas 
-		$listventas = Ventas::find()->where(['entregado'=>1])->andWhere(['turno_id'=>$turno->id])->orderBy('id DESC');
+		$listventas = Ventas::find()
+			->where(['entregado'=>1])
+			->andWhere(['turno_id'=>$turno->id])		
+			->orderBy('id DESC');
 		$historialventas = new ActiveDataProvider([
           'query' => $listventas,
         ]);
@@ -156,7 +127,7 @@ class VentasController extends Controller {
 		/**
 		**+++++++++++++CALCULOS ++++++++++++++++++++++
 		**/
-		$productos = Productos::find()->all();
+		$productos = Productos::find()->where(['>','id',0])->all();
 				
 		$totalventas = $model->CalcularTotalVentas($turno);
 		
@@ -188,6 +159,48 @@ class VentasController extends Controller {
 		]);	
 			
 					
+	}
+
+	private function restarStock ($producto_id,$turno,$cantidad){
+
+		$modelp = Productos::find()->where(['id'=>$producto_id])->one();
+
+		switch ($producto_id) {
+
+			case '1': // PROMO								
+				$turno->sobra_pollo = $turno->sobra_pollo - $cantidad;
+				$modelp->stock = $modelp->stock - $cantidad;
+				if (!$turno->save() && $modelp->save()) {
+					throw new \yii\web\HttpException(400, 'Error al descontar del la tabla turno cantidad pollo');
+				}	
+			break;
+
+			case '2': // POLLO								
+				$turno->sobra_pollo = $turno->sobra_pollo - $cantidad;
+				$modelp->stock = $modelp->stock - $cantidad;								
+				if (!$turno->save() && $modelp->save()) {
+					throw new \yii\web\HttpException(400, 'Error al descontar del la tabla cantidad pollo');
+				}	
+			break;
+
+			case '3': // MEDIA POLLO
+				$turno->sobra_pollo = $turno->sobra_pollo - ($cantidad*0.5);
+				$modelp->stock = $modelp->stock - ($cantidad*0.5);								
+				if (!$turno->save() && $modelp->save()) {
+					throw new \yii\web\HttpException(400, 'Error al descontar del la tabla cantidad pollo');
+				}	
+			break;
+			
+			
+			default:											
+				$modelp->stock = $modelp->stock - $cantidad;
+				if (!$modelp->save()) {
+					throw new \yii\web\HttpException(400, 'Error al descontar en la tabla producto id' );
+				}	
+			break;
+		}
+
+		return ;
 	}
 
 	/**

@@ -5,6 +5,7 @@ namespace app\controllers;
 use Yii;
 use app\models\Egresos;
 use app\models\Productos;
+use app\models\Proveedores;
 use app\models\Turno;
 use app\models\EgresosSearch;
 use yii\web\Controller;
@@ -68,10 +69,26 @@ class EgresosController extends Controller
         $model = new Egresos();
 
         if ($model->load(Yii::$app->request->post())) {
+           
             $turno = Turno::find()->orderBy(['id' => SORT_DESC])->one();                        
-            $model->fecha = date('Y-m-d',strtotime($model->fecha));
+            
+            $model->fecha = date('Y-m-d',strtotime($model->fecha));            
+
             $model->turno_id = $turno->id;
+            
+            // si selecciona un producto
+            if ($model->prod_id != ""){
+                //busco el producto por id
+                $modelproductos = Productos::find()->where(['id'=>$model->prod_id])->one();
+                //sumo al campo stock del producto
+                $modelproductos->stock = $modelproductos->stock + $model->cantidad;
+                //guardo
+                $modelproductos->save();
+
+            }
+
             if (!$model->save()) {
+
                 throw new \yii\web\HttpException(400, 'Error al guardar');
             }
 
@@ -84,11 +101,22 @@ class EgresosController extends Controller
                 $productos[$p['id']] = $p['nombre'];
             }   
 
+            // paso fecha actual
             $model->fecha = date('d-m-Y');
+
+            //proveedores
+            $listproveedores = Proveedores::find()->all(); 
             
+            foreach ($listproveedores as $pr) {
+                $proveedores[$pr['id']] = $pr['nombre'];
+            } 
+            
+
+
             return $this->render('create', [
                 'model' => $model,
                 'productos'=>$productos,
+                'proveedores'=> $proveedores,
             ]);
         }
     }
@@ -103,7 +131,11 @@ class EgresosController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
+        
+            $model->fecha = date('Y-m-d',strtotime($model->fecha));
+            
+            $model->save();
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [

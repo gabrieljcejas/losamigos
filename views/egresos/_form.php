@@ -44,12 +44,26 @@ use yii\jui\DatePicker;
                 ],
             ]);?>
         </div>
-        
+    </div>
+   
+    <div class="row">        
+        <div class="col-md-4">
+            <?=$form->field($model, 'prov_id')->widget(Select2::classname(), [
+                'data' => $proveedores,                     
+                'options' => ['placeholder' => 'Buscar...'],
+                'pluginOptions' => [
+                    'allowClear' => true
+                ],
+            ]);?>
+        </div>
+    </div>
+    
+    <div class="row">
         <div class="col-md-4">
             <?= $form->field($model, 'otro')->textInput() ?>
         </div>
     </div>
-    
+
     <div class="row">
         <div class="col-md-2">
             <?= $form->field($model, 'precio')->textInput() ?>
@@ -64,7 +78,7 @@ use yii\jui\DatePicker;
     
     <div class="row">
         <div class="col-md-8">
-            <?= $form->field($model, 'obs')->textArea(['rows' => 2]) ?>
+            <!--<?= $form->field($model, 'obs')->textArea(['rows' => 2]) ?>-->
         </div>
     </div>
     

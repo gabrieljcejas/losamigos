@@ -43,6 +43,7 @@ echo Nav::widget([
 		['label' => 'Clientes', 'url' => ['/clientes/index']],
 		//['label' => 'Proveedores', 'url' => ['/proveedores/index']],
 		['label' => 'Productos', 'url' => ['/productos/index']],
+		['label' => 'Proveedores', 'url' => ['/proveedores/create']],
 		['label' => 'Reportes', 'url' => ['#'],
 			'items' => [
 				['label' => 'Movimientos de Caja', 'url' => ['ventas/consulta-movimientos-caja']],

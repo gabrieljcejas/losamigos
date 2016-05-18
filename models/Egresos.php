@@ -18,6 +18,7 @@ use Yii;
  * @property string $total
  * @property integer $usuario_id
  * @property integer $turno_id
+ * @property integer $prov_id
  */
 class Egresos extends \yii\db\ActiveRecord
 {
@@ -29,15 +30,16 @@ class Egresos extends \yii\db\ActiveRecord
         return 'egresos';
     }
 
+
     /**
      * @inheritdoc
      */
     public function rules()
     {
         return [
-            [['fecha', 'precio', 'total','cantidad'], 'required'],
+            [['fecha', 'precio', 'total','cantidad','prov_id'], 'required'],
             [['fecha'], 'safe'],
-            [['prod_id','forma_pago','usuario_id','turno_id'], 'integer'],
+            [['prod_id','forma_pago','usuario_id','turno_id','prov_id'], 'integer'],
             [['total', 'cantidad', 'precio'], 'number'],
             [['obs'], 'string', 'max' => 120],
             [['otro'], 'string', 'max' => 40],
@@ -52,20 +54,25 @@ class Egresos extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'fecha' => 'Fecha',
-            'prod_id' => 'Prod ID',
-            'otro' => 'Otro',
+            'prod_id' => 'Producto',
+            'otro' => 'Detalle',
             'forma_pago' => 'Forma Pago',
             'obs' => 'Obs',
             'cantidad' => 'Cantidad',
             'precio' => 'Precio',
             'total' => 'Total',
             'usuario_id' => 'Usuario ID',
-            'turno_id' => 'Turno'
+            'turno_id' => 'Turno',
+            'prov_id' => 'Proveedor',   
         ];
     }
 
 
     public function getProductos() {
         return $this->hasOne(Productos::className(), ['id' => 'prod_id']);
+    }
+
+    public function getProveedores() {
+        return $this->hasOne(Proveedores::className(), ['id' => 'prov_id']);
     }
 }
