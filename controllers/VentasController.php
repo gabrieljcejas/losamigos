@@ -193,10 +193,10 @@ class VentasController extends Controller {
 			
 			
 			default:											
-				$modelp->stock = $modelp->stock - $cantidad;
+				/*$modelp->stock = $modelp->stock - $cantidad;
 				if (!$modelp->save()) {
 					throw new \yii\web\HttpException(400, 'Error al descontar en la tabla producto id' );
-				}	
+				}*/	
 			break;
 		}
 
@@ -227,7 +227,8 @@ class VentasController extends Controller {
 
 			$egresos = Egresos::find()->where(['>=', 'fecha', $fecha_desde])->andWhere(['<=', 'fecha', $fecha_hasta])->orderBy("fecha")->all();;
 
-			//var_dump($egresos);die;
+			$modelVentas = new Ventas();
+			$productos_vendidos = $modelVentas->ListCantProdVendidosPorFecha($fecha_desde,$hasta);		
 
 			$mpdf = new mPDF('utf-8', 'A4');
 			$mpdf->WriteHTML($this->renderPartial('imprimir_movimientos_caja', [
@@ -235,6 +236,7 @@ class VentasController extends Controller {
 				'egresos' => $egresos,
 				'fecha_desde' => $fecha_desde,
 				'fecha_hasta' => $fecha_hasta,
+				'productos_vendidos' => $productos_vendidos
 			]));
 			$mpdf->Output();
 			exit;
@@ -323,6 +325,48 @@ class VentasController extends Controller {
 
 	}
 
+	public function actionConsultaTotalProdVend() {
+
+
+		if (Yii::$app->request->post()) {
+
+			$post = Yii::$app->request->post();
+
+			$fecha_desde = date('Y-m-d', strtotime($post['fecha_desde']));			
+			$fecha_hasta = date('Y-m-d', strtotime($post['fecha_hasta']));
+			
+			$h = $fecha_hasta;		 	
+		 	$fields = explode('-', $h);		 	
+		 	$hasta = $fields[0].'-'.$fields[1].'-'.($fields[2]+1);
+
+		 	
+			$ventas = new Ventas();
+			$query = $ventas->ListCantProdVendidosPorFecha($fecha_desde,$hasta);			
+			
+			$mpdf = new mPDF('utf-8', 'A4');
+			
+			$mpdf->WriteHTML($this->renderPartial('imprimir_cantidad_productos_vendidos', [
+				'query' => $query,				
+				'fecha_desde' => $fecha_desde,
+				'fecha_hasta' => $fecha_hasta,
+			]));
+			
+			$mpdf->Output();
+			
+			exit;
+			
+		}
+		
+		$titulo = "Consulta Productos Vendidos";
+		
+		return $this->render('_consulta_entre_fechas',[
+				'titulo'=>$titulo,
+			]);
+
+
+	}
+
+
 	public function actionPedidoListo() {
 		
 		$post = Yii::$app->request->post();
@@ -336,11 +380,11 @@ class VentasController extends Controller {
 		if (!$model->save()) {
 			throw new \yii\web\HttpException(400, 'Error al guardar listo entregado');
 		}
-		else{
+		/*else{
 			return $this->render('view', [
 				'model' => $this->findModel($id),
 			]);
-		}
+		}*/
 	}
 
 

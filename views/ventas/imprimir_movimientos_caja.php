@@ -106,4 +106,26 @@
 <p><strong>DEBE: $<?=$ventasTotal?></strong></p>
 <p><strong>HABER: $<?=$egresosTotal?></strong></p>
 <p><strong>SALDO: $<?=$saldo?></strong></p>
+<br>
+
+<!--
+ ---- CANTIDAD DE PRODUCTOS VENDIDOS 
+ -->
+<h3>Cantidad de Productos Vendidos</h3>     
+
+<table class="table" >
+    <?php if (isset($productos_vendidos)){ ?>
+        <?php foreach ($productos_vendidos as $key => $value) { ?>
+        
+            <tr>
+                <td><?= strtoupper($key) ?></td>
+                <td><?=  $value ?></td>
+            </tr>        
+            
+        <?php } ?>
+    <?php } ?>
+</table>                
+
+
+
 

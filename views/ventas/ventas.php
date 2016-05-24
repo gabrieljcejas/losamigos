@@ -135,7 +135,7 @@ use kartik\select2\Select2;
                     </div>
 
                     <div class="col-md-2"> 
-                        <?= $form->field($model, 'total')->textInput() ?> 
+                        <?= $form->field($model, 'total')->textInput(['readOnly' =>'readOnly']) ?> 
                         <?= $form->field($model, 'paga')->textInput() ?> 
                         <?= $form->field($model, 'vuelto')->textInput(['readOnly' =>'readOnly']) ?> 
                     </div>   

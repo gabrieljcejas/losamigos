@@ -172,5 +172,37 @@ class Ventas extends \yii\db\ActiveRecord
         return  $listado;
    }
 
+   /**
+    **CALCULO TOTAL DE PRODUCTOS VENDIDOS POR FECHAS
+    **/
+    public function ListCantProdVendidosPorFecha($fecha_desde,$fecha_hasta){
+
+        
+        $sql = "SELECT p.nombre as 'producto',vd.cant as 'cantidad' FROM `ventas` v
+                JOIN ventas_detalle vd ON v.id=vd.venta_id
+                JOIN productos p ON p.id=vd.prod_id
+                WHERE v.entregado=1 AND v.fecha >='" . $fecha_desde . "' AND v.fecha <='" . $fecha_hasta . "'  ORDER BY  p.nombre,vd.cant";
+
+        $ventas = Ventas::findBySql($sql)->asArray()->all();                  
+        $prod_id = 1;
+        $sumo = 0;
+
+        foreach ($ventas as $v) {
+            
+            if ($v['producto'] == $prod_id){
+               $sumo = $v['cantidad'] + $sumo;               
+               $listado[$v['producto']] = $sumo;
+            }else{
+                $sumo = 0;
+                $sumo = $v['cantidad'] + $sumo;               
+                $listado[$v['producto']] = $sumo;
+            }
+
+            $prod_id = $v['producto'];
+        }
+
+        return  $listado;
+   }
+
 
 }

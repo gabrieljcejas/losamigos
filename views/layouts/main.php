@@ -27,7 +27,7 @@ AppAsset::register($this);
 <div class="wrap">
     <?php
 NavBar::begin([
-	'brandLabel' => 'Pollos a las brasas LOS AMIGOS',
+	'brandLabel' => 'LOS AMIGOS',
 	'brandUrl' => Yii::$app->homeUrl,
 	'options' => [
 		'class' => 'navbar-inverse navbar-fixed-top',
@@ -36,7 +36,7 @@ NavBar::begin([
 echo Nav::widget([
 	'options' => ['class' => 'navbar-nav navbar-right'],
 	'items' => [
-		['label' => 'Inicio', 'url' => ['/site/index']],
+		//['label' => 'Inicio', 'url' => ['/site/index']],
 		['label' => 'Turno', 'url' => ['/turno/index']],
 		['label' => 'Ventas', 'url' => ['/ventas/index']],
 		['label' => 'Egresos', 'url' => ['/egresos/index']],
@@ -49,13 +49,14 @@ echo Nav::widget([
 				['label' => 'Movimientos de Caja', 'url' => ['ventas/consulta-movimientos-caja']],
 				['label' => 'Egresos', 'url' => ['ventas/consulta-egresos']],
 				['label' => 'Ventas', 'url' => ['ventas/consulta-ventas']],
+				['label' => 'Cantidad Productos Vendidos', 'url' => ['ventas/consulta-total-prod-vend']],
 				//'<li class="divider"></li>',
 				//['label' => 'Estado de Cuenta', 'url' => ['/proveedor/index']],
 			],
 		],
 
 		//['label' => 'Promos', 'url' => ['/site/promos']],
-		Yii::$app->user->isGuest ? (
+		/*Yii::$app->user->isGuest ? (
 			['label' => 'Login', 'url' => ['/site/login']]
 		) : (
 			'<li>'
@@ -66,7 +67,7 @@ echo Nav::widget([
 			)
 			. Html::endForm()
 			. '</li>'
-		),
+		),*/
 	],
 ]);
 NavBar::end();
