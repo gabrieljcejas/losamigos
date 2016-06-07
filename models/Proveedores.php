@@ -51,4 +51,10 @@ class Proveedores extends \yii\db\ActiveRecord
             'obs' => 'Obs',
         ];
     }
+
+
+
+    public function getProveedores() {
+        return $this->hasMany(Proveedores::className(), ['prov_id' => 'id']);
+    }
 }

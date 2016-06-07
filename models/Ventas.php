@@ -69,7 +69,7 @@ class Ventas extends \yii\db\ActiveRecord
             'cliente_id' => 'CLIENTE',
             'forma_pago' => '',
             'total' => 'Total',
-            'obs' => 'Observacion',
+            'obs' => 'Obs',
             'usuario_id' => 'Usuario ID',
             'envio_domicilio' => 'Envio',
             'fecha_encargue'=>'Fecha',

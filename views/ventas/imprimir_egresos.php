@@ -8,6 +8,7 @@
 <tr>
 	<th>Fecha</th>
 	<th>Proveedor</th>
+	<th>Producto</th>
 	<th>Detalle</th>
 	<th>Cantidad</th>
 	<th>Precio Un.</th>
@@ -23,6 +24,7 @@
 		<tr>
 			<td align="center"><?=date("d-m-Y", strtotime($e->fecha))?></td>
 			<td align="center"><?=$e->proveedores->nombre ?></td>
+			<td align="center"><?=$e->productos->nombre ?></td>
 			<?php if ($e->prod_id == ""){ ?> 
 				<td align="center"><?=$e->otro ?></td>
 			<?php } else { ?>

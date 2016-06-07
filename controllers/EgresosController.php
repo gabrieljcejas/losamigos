@@ -102,7 +102,8 @@ class EgresosController extends Controller
             }   
 
             // paso fecha actual
-            $model->fecha = date('d-m-Y');
+            date_default_timezone_set('America/Buenos_Aires');
+            $model->fecha = date('d-m-Y',time());
 
             //proveedores
             $listproveedores = Proveedores::find()->all(); 

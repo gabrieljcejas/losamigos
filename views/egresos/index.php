@@ -22,8 +22,8 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-            'id',
+            //['class' => 'yii\grid\SerialColumn'],
+            //'id',
             [
                 'attribute'=>'fecha',
                 'value'=> function ($model) {
@@ -31,11 +31,13 @@ $this->params['breadcrumbs'][] = $this->title;
                 }
             ],
             [
-                'attribute'=>'producto',
-                'value'=> function ($model) {
-                    return $model->productos->nombre;
-                }
-            ],          
+                'attribute'=>'prov_id',
+                'value'=> 'proveedores.nombre',
+            ],
+            [
+                'attribute'=>'prod_id',
+                'value'=> 'productos.nombre',
+            ],            
             'otro',
             //'forma_pago',
             // 'obs',

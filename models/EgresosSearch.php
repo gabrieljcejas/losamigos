@@ -18,8 +18,8 @@ class EgresosSearch extends Egresos
     public function rules()
     {
         return [
-            [['id', 'prod_id','forma_pago', 'cantidad', 'precio', 'usuario_id'], 'integer'],
-            [['fecha', 'obs'], 'safe'],
+            [['id','forma_pago', 'cantidad', 'precio', 'usuario_id'], 'integer'],
+            [['fecha', 'obs','prov_id','prod_id'], 'safe'],
             [['total'], 'number'],
             [['otro'], 'string'],
         ];
@@ -59,21 +59,25 @@ class EgresosSearch extends Egresos
             return $dataProvider;
         }
 
+         $query->joinWith('productos') ;
+
+         $query->joinWith('proveedores') ;
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
             'fecha' => $this->fecha,
-            'prod_id' => $this->prod_id,            
+            //'prod_id' => $this->prod_id,            
             'forma_pago' => $this->forma_pago,
             'cantidad' => $this->cantidad,
             'precio' => $this->precio,
             'total' => $this->total,
-            'usuario_id' => $this->usuario_id,
+            'usuario_id' => $this->usuario_id,           
         ]);
 
         $query->andFilterWhere(['like', 'obs', $this->obs]);
         $query->andFilterWhere(['like', 'otro', $this->otro]);
-
+        $query->andFilterWhere(['like', 'productos.nombre', $this->prod_id]);
+        $query->andFilterWhere(['like', 'proveedores.nombre', $this->prov_id]);
         $query->orderBy('id DESC');
 
         return $dataProvider;

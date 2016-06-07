@@ -379,12 +379,8 @@ class VentasController extends Controller {
 		
 		if (!$model->save()) {
 			throw new \yii\web\HttpException(400, 'Error al guardar listo entregado');
-		}
-		/*else{
-			return $this->render('view', [
-				'model' => $this->findModel($id),
-			]);
-		}*/
+		}		
+		return;
 	}
 
 
@@ -410,9 +406,10 @@ class VentasController extends Controller {
 
 	
 	public function actionDelete($id) {
+		
 		$this->findModel($id)->delete();
-
 		return $this->redirect(['index']);
+		
 	}
 
 
