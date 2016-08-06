@@ -18,9 +18,8 @@ class EgresosSearch extends Egresos
     public function rules()
     {
         return [
-            [['id','forma_pago', 'cantidad', 'precio', 'usuario_id'], 'integer'],
-            [['fecha', 'obs','prov_id','prod_id'], 'safe'],
-            [['total'], 'number'],
+            [['id','forma_pago','usuario_id'], 'integer'],
+            [['fecha', 'obs','prov_id','prod_id'], 'safe'],            
             [['otro'], 'string'],
         ];
     }
@@ -68,9 +67,9 @@ class EgresosSearch extends Egresos
             'fecha' => $this->fecha,
             //'prod_id' => $this->prod_id,            
             'forma_pago' => $this->forma_pago,
-            'cantidad' => $this->cantidad,
-            'precio' => $this->precio,
-            'total' => $this->total,
+            //'cantidad' => $this->cantidad,
+            //'precio' => $this->precio,
+            //'total' => $this->total,
             'usuario_id' => $this->usuario_id,           
         ]);
 

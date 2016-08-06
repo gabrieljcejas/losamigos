@@ -31,7 +31,7 @@ use yii\jui\DatePicker;
 
     <?= $form->field($model, 'hora_inicio')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'hora_fin')->textInput(['maxlength' => true]) ?>
+    <!--<?= $form->field($model, 'hora_fin')->textInput(['maxlength' => true]) ?>-->
 
     <?= $form->field($model, 'cant_pollo')->textInput(['maxlength' => true]) ?>
 

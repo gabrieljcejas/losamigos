@@ -8,8 +8,8 @@
 <tr>
 	<th>Fecha</th>
 	<th>Concepto</th>
-	<th>Debe</th>
-	<th>Haber</th>
+	<th>Ingresos</th>
+	<th>Egresos</th>
 	<th>Saldo</th>
 </tr>
 
@@ -103,8 +103,8 @@
 
 </table>
 <br>
-<p><strong>DEBE: $<?=$ventasTotal?></strong></p>
-<p><strong>HABER: $<?=$egresosTotal?></strong></p>
+<p><strong>TOTAL INGRESOS: $<?=$ventasTotal?></strong></p>
+<p><strong>TOTAL EGRESOS: $<?=$egresosTotal?></strong></p>
 <p><strong>SALDO: $<?=$saldo?></strong></p>
 <br>
 

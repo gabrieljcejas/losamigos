@@ -30,7 +30,7 @@ class Turno extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['fecha', 'hora_inicio', 'cant_pollo','caja_inicial'], 'required'],
+            [['fecha','cant_pollo','caja_inicial'], 'required'],
             [['fecha'], 'safe'],
             [['cant_pollo', 'sobra_pollo','caja_inicial'], 'number'],
             [['hora_inicio', 'hora_fin'], 'string', 'max' => 10],
@@ -47,7 +47,7 @@ class Turno extends \yii\db\ActiveRecord
             'fecha' => 'Fecha',
             'hora_inicio' => 'Hora Inicio',
             'hora_fin' => 'Hora Fin',
-            'cant_pollo' => 'Cantidad de Pollos Incial',
+            'cant_pollo' => 'Pollos Inicio',
             'sobra_pollo' => 'Stock',
             'caja_inicial' => 'Caja Inicial',
         ];

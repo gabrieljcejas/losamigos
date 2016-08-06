@@ -71,32 +71,32 @@ $this->title = 'Pedidos Pendientes';
                [
                 'class' => 'yii\grid\ActionColumn',
                 'header' => 'Actions',
-                'template' => '{listo} {cancela}',
+                'template' => '{listo} {cancelar}',
                 'buttons' => [             
                     
                     'listo' => function ($url, $model) {
-                        return html::button(' Listo', ['class' => ' btn btn-success glyphicon glyphicon-ok', 'name' => 'listo', 'value' => $model->id]);                     
+                        return html::button('', ['class' => ' btn btn-success glyphicon glyphicon-ok', 'name' => 'listo', 'value' => $model->id]);                     
                     },
-                    /*'cancela' => function ($url, $model) {
+                    'cancelar' => function ($url, $model) {
                         return Html::a('<span class="btn btn-default glyphicon glyphicon-remove"></span>', $url, [
                             'title' => Yii::t('app', 'Eliminar'),
                             'data-confirm' => Yii::t('yii', 'Seguro que desea eliminar pedido?'),
                             //'data-method' => 'post',
-                            //'name'=>'cancelar',
-                            //value' => $model->id,
+                            'name'=>'cancelar',
+                            'value' => $model->id,
 
                         ]);
-                    },*/
+                    },
                 ],
                 'urlCreator' => function ($action, $model, $key, $index){                              
                     if ($action === 'listo') {
                         $url = Url::to(['ventas/pedido-listo', 'id' => $model->id]);
                         return $url;
                     }   
-                    /*if ($action === 'cancela') {
+                    if ($action === 'cancelar') {
                         $url = Url::to(['ventas/pedido-cancela', 'id' => $model->id]);
                         return $url;
-                    } */
+                    } 
 
                 },
               ],          
@@ -114,8 +114,23 @@ $this->title = 'Pedidos Pendientes';
             var id = $(this).attr('value');            
             
             $.ajax({
-                type: "POST",
+                type: "GET",
                 url: "../web/index.php?r=ventas/pedido-listo",
+                data: {id: id},                               
+                success: function (data) {
+                    $.pjax.reload({container: '#grd_pedidos_pendientes'});                    
+                }
+            });  
+          
+    });
+
+    $("button[name='cancelar']").click(function () {
+                               
+            var id = $(this).attr('value');            
+            
+            $.ajax({
+                type: "POST",
+                url: "../web/index.php?r=ventas/pedido-cancela",
                 data: {id: id},                               
                 success: function (data) {
                     $.pjax.reload({container: '#grd_pedidos_pendientes'});                    

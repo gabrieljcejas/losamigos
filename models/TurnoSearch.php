@@ -20,7 +20,7 @@ class TurnoSearch extends Turno
         return [
             [['id'], 'integer'],
             [['fecha', 'hora_inicio', 'hora_fin'], 'safe'],
-            [['cant_pollo', 'sobra_pollo'], 'number'],
+            //[['cant_pollo', 'sobra_pollo'], 'number'],
         ];
     }
 
@@ -62,8 +62,8 @@ class TurnoSearch extends Turno
         $query->andFilterWhere([
             'id' => $this->id,
             'fecha' => $this->fecha,
-            'cant_pollo' => $this->cant_pollo,
-            'sobra_pollo' => $this->sobra_pollo,
+            //'cant_pollo' => $this->cant_pollo,
+            //'sobra_pollo' => $this->sobra_pollo,
         ]);
 
         $query->andFilterWhere(['like', 'hora_inicio', $this->hora_inicio])

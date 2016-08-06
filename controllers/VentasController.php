@@ -383,6 +383,26 @@ class VentasController extends Controller {
 		return;
 	}
 
+	public function actionPedidoCancela() {
+		
+		$post = Yii::$app->request->get();
+		
+		$id = $post['id'];
+
+		try { 
+			
+			$this->findModel($id)->delete();						
+			
+			VentasDetalle::deleteAll('venta_id = :id',[':id' => $id]);
+
+		} catch (Exception $e) {    	
+    		
+    		echo 'Error al Borrar Pedido Pendiente: ',  $e->getMessage(), "\n";
+
+		}
+
+		return $this->redirect(['index']);
+	}
 
 
 	public function actionView($id) {
