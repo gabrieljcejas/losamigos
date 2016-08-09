@@ -19,7 +19,7 @@ class EgresosSearch extends Egresos
     {
         return [
             [['id','forma_pago','usuario_id'], 'integer'],
-            [['fecha', 'obs','prov_id','prod_id'], 'safe'],            
+            [['fecha', 'obs','prov_id'], 'safe'],            
             [['otro'], 'string'],
         ];
     }
@@ -75,7 +75,7 @@ class EgresosSearch extends Egresos
 
         $query->andFilterWhere(['like', 'obs', $this->obs]);
         $query->andFilterWhere(['like', 'otro', $this->otro]);
-        $query->andFilterWhere(['like', 'productos.nombre', $this->prod_id]);
+        //$query->andFilterWhere(['like', 'productos.nombre', $this->prod_id]);
         $query->andFilterWhere(['like', 'proveedores.nombre', $this->prov_id]);
         $query->orderBy('id DESC');
 

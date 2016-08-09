@@ -114,7 +114,7 @@ $this->title = 'Pedidos Pendientes';
             var id = $(this).attr('value');            
             
             $.ajax({
-                type: "GET",
+                type: "POST",
                 url: "../web/index.php?r=ventas/pedido-listo",
                 data: {id: id},                               
                 success: function (data) {
@@ -129,7 +129,7 @@ $this->title = 'Pedidos Pendientes';
             var id = $(this).attr('value');            
             
             $.ajax({
-                type: "POST",
+                type: "GET",
                 url: "../web/index.php?r=ventas/pedido-cancela",
                 data: {id: id},                               
                 success: function (data) {

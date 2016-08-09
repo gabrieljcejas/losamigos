@@ -34,7 +34,7 @@ use yii\jui\DatePicker;
         </div>
     </div><br>
 
-    <div class="row">        
+    <!--<div class="row">        
         <div class="col-md-4">
             <?=$form->field($model, 'prod_id')->widget(Select2::classname(), [
                 'data' => $productos,                     
@@ -44,7 +44,7 @@ use yii\jui\DatePicker;
                 ],
             ]);?>
         </div>
-    </div>
+    </div>-->
    
     <div class="row">        
         <div class="col-md-4">

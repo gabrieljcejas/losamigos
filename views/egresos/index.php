@@ -34,10 +34,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute'=>'prov_id',
                 'value'=> 'proveedores.nombre',
             ],
-            [
+            /*[
                 'attribute'=>'prod_id',
                 'value'=> 'productos.nombre',
-            ],            
+            ],*/            
             'otro',
             //'forma_pago',
             // 'obs',
